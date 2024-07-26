@@ -102,4 +102,7 @@ def submit_deposit(request):
                 )
         transaction.save()
         return render(request, 'deposit.html', {'success': 'Deposit Sucessfull'})
+    
+def transaction_view(request):
+    return render(request, 'transaction.html',{})
 

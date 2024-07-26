@@ -13,13 +13,14 @@
             <h1>Fundra Dashboard</h1>
             <nav>
                 <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="{% url 'accounts' %}">Home</a></li>
                     <li><a href="{% url 'deposit' %}">Deposit</a></li>
                     <li><a href="{% url 'withdraw' %}">Withdraw</a></li>
                     <li><a href="{% url 'transfer' %}">Account Transfer</a></li>
-                    <li><a href="">Profile</a></li>
+                    <li><a href="{% url 'transaction' %}">Transaction Report</a></li>
                     <li><a href="">Settings</a></li>
                 </ul>
+                <a style= "right: 10px; top: 20px; position: absolute; color: aliceblue;" href="" class="logout-button">Logout</a>
             </nav>
         </div>
     </header>

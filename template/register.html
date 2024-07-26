@@ -9,87 +9,104 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            background-image: url("{% static 'images/Background.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        .navbar {
-            background: rgba(255, 255, 255, 0.9);
-            width: 100%;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar .navbar-brand {
-            color: hotpink;
-            font-weight: bold;
-        }
-        .navbar .nav-link {
-            color: hotpink !important;
-            transition: color 0.3s;
-        }
-        .navbar .nav-link:hover {
-            color: #ff1493 !important;
-        }
-        .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        .navbar-toggler-icon {
-            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba%28255, 255, 255, 0.5%29" stroke-width="2" linecap="round" linejoin="round" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
-        }
-        .jumbotron {
-            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(255, 105, 180, 0.8));
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.5s ease-in-out;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 100px; /* To push the form below the navbar */
-            text-align: center;
-            color: white;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .form-group .tooltip-text {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: white;
-        }
-        .btn-primary {
-            background-color: white;
-            color: hotpink;
-            border: none;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #ff69b4;
-            color: white;
-            transform: scale(1.05);
-        }
-        .form-control {
-            border-radius: 30px;
-            padding: 10px 20px;
-        }
-        .form-control:focus {
-            border-color: hotpink;
-            box-shadow: 0 0 5px hotpink;
-        }
-        .text-secondary {
-            color: white !important;
-        }
+        /* styles.css */
+body {
+    background-image: url("../static/images/Background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .navbar-brand {
+    color: hotpink;
+    font-weight: bold;
+}
+
+.navbar .nav-link {
+    color: hotpink !important;
+    transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #ff1493 !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba%28255, 255, 255, 0.5%29" stroke-width="2" linecap="round" linejoin="round" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+}
+
+.jumbotron {
+    background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(255, 105, 180, 0.8));
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.5s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 100px; /* To push the form below the navbar */
+    text-align: center;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.form-group .tooltip-text {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-primary {
+    background-color: white;
+    color: hotpink;
+    border: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #ff69b4;
+    color: white;
+    transform: scale(1.05);
+}
+
+.form-control {
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+
+.form-control:focus {
+    border-color: hotpink;
+    box-shadow: 0 0 5px hotpink;
+}
+
+.text-secondary {
+    color: white !important;
+}
+
     </style>
 </head>
 <body>
@@ -157,6 +174,33 @@
                 </span>
                 <div class="invalid-feedback">
                     Please confirm your password.
+                </div>
+            </div>
+            <!-- ID Type Selection -->
+            <div class="form-group position-relative">
+                <label for="idType">ID Type</label>
+                <select name="id_type" class="form-control" id="idType" required>
+                    <option value="">Select ID Type</option>
+                    <option value="passport">Passport</option>
+                    <option value="driver_license">Driver's License</option>
+                    <option value="national_id">National ID</option>
+                </select>
+                <span class="tooltip-text" data-toggle="tooltip" data-placement="top" title="Select your ID type">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+                <div class="invalid-feedback">
+                    Please select an ID type.
+                </div>
+            </div>
+            <!-- ID Number Input -->
+            <div class="form-group position-relative">
+                <label for="idNumber">ID Number</label>
+                <input type="text" name="id_number" class="form-control" id="idNumber" placeholder="Enter ID number" required>
+                <span class="tooltip-text" data-toggle="tooltip" data-placement="top" title="Enter your ID number">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+                <div class="invalid-feedback">
+                    Please enter your ID number.
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Register</button>

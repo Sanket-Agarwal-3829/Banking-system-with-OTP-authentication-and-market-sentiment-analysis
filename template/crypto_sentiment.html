@@ -1,0 +1,68 @@
+<!-- templates/myapp/crypto_sentiment.html -->
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Sentiment Analysis</title>
+    <link rel="stylesheet" href="{% static 'css/style_crypto.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Crypto Sentiment Analysis</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'accounts' %}">Home</a></li>
+                <li><a href="{% url 'crypto_sentiment_home' %}">Crypto Sentiment recommendation</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h2>Welcome to Crypto Sentiment Analysis</h2>
+            <p>Here, you can see the latest sentiment analysis and price trends for top cryptocurrencies. Our analysis is based on recent social media activity and historical price data, providing you with actionable insights for your investment decisions.</p>
+        </section>
+
+        <section class="crypto-section">
+            <h2>Bitcoin Sentiment and Price Trend</h2>
+            <img src="data:image/png;base64,{{ btc_graph }}" alt="Bitcoin sentiment and price trend">
+            <div class="recommendation {{ btc_recommendation|lower }}">
+                {{ btc_recommendation }}
+            </div>
+            <p>Bitcoin is the first and most widely recognized cryptocurrency. It is often referred to as digital gold due to its limited supply and store of value properties.</p>
+            <ul>
+                <li>Market Cap: ${{ btc_market_cap|floatformat:2|intcomma }}</li>
+                <li>Current Price: ${{ btc_current_price|floatformat:2|intcomma }}</li>
+                <li>Volatility: {{ btc_volatility }}</li>
+                <li>Technology: Blockchain-based, decentralized</li>
+            </ul>
+        </section>
+
+        <section class="crypto-section">
+            <h2>Ethereum Sentiment and Price Trend</h2>
+            <img src="data:image/png;base64,{{ eth_graph }}" alt="Ethereum sentiment and price trend">
+            <div class="recommendation {{ eth_recommendation|lower }}">
+                {{ eth_recommendation }}
+            </div>
+            <p>Ethereum is a decentralized platform that enables smart contracts and decentralized applications (dApps) to be built and run without any downtime, fraud, control, or interference from a third party. It is currently the second-largest cryptocurrency by market cap.</p>
+            <ul>
+                <li>Market Cap: ${{ eth_market_cap|floatformat:2|intcomma }}</li>
+                <li>Current Price: ${{ eth_current_price|floatformat:2|intcomma }}</li>
+                <li>Volatility: {{ eth_volatility }}</li>
+                <li>Technology: Blockchain-based, supports smart contracts and dApps</li>
+            </ul>
+        </section>
+
+        <section class="explanation">
+            <p>Our analysis indicates whether you should <strong>buy</strong>, <strong>sell</strong>, or <strong>hold</strong> your cryptocurrency based on current market sentiment and historical price trends.</p>
+        </section>
+    </main>
+    <footer style="background-color: #333; color: white; padding: 10px; text-align: center;">
+        <p>Crypto Sentiment Analysis | Your source for the latest cryptocurrency market trends</p>
+        <p>Contact us: info@cryptosentimentanalysis.com</p>
+        <p>Follow us on <a href="#" style="color: #00aced;">Twitter</a> and <a href="#" style="color: #3b5998;">Facebook</a></p>
+    </footer>
+</body>
+</html>

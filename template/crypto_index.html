@@ -1,0 +1,48 @@
+<!-- templates/myapp/index.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Fundra</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'accounts' %}">Home</a></li>
+                <li><a href="{% url 'crypto_sentiment' %}">Crypto Sentiment</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h2>Welcome to Crypto Sentiment Analysis</h2>
+            <p>We provide the latest sentiment analysis and price trends for top cryptocurrencies. Our analysis is based on recent social media activity and historical price data, providing you with actionable insights for your investment decisions.</p>
+        </section>
+
+        <section class="crypto-predictions">
+            <h2>Latest Predictions</h2>
+            <div class="prediction-box">
+                <div class="prediction-card {{ btc_recommendation|lower }}">
+                    <h3>Bitcoin</h3>
+                    <p>{{ btc_recommendation }}</p>
+                </div>
+                <div class="prediction-card {{ eth_recommendation|lower }}">
+                    <h3>Ethereum</h3>
+                    <p>{{ eth_recommendation }}</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Crypto Sentiment Analysis | Your source for the latest cryptocurrency market trends</p>
+        <p>Contact us: info@cryptosentimentanalysis.com</p>
+        <p>Follow us on <a href="#" style="color: #00aced;">Twitter</a> and <a href="#" style="color: #3b5998;">Facebook</a></p>
+    </footer>
+</body>
+</html>

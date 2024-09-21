@@ -30,7 +30,23 @@ class Transactions(models.Model):
     TC_amount = models.CharField(max_length=50, null=True, blank=True)
     TC_type = models.CharField(max_length=100, null=True, blank=True)
     TC_date = models.DateTimeField(auto_now_add=True)
+    TC_balance = models.FloatField(null=True, blank=True)
     TC_receiver_account = models.ForeignKey(Account, related_name='received_transactions' ,on_delete=models.CASCADE ,null=True, blank=True)
 
     def __str__(self):
         return str(self.TC_date) + ' ' + str(self.TC_sender_account.AC_user.UP_UserName)
+    
+
+class SentimentData(models.Model):
+    crypto = models.CharField(max_length=10)
+    date = models.CharField(max_length=10)
+    sentiment_score = models.FloatField()
+    price = models.FloatField()
+    recommendation = models.CharField(max_length=10)
+    graph = models.TextField()
+    market_cap = models.FloatField()
+    current_price = models.FloatField()
+    volatility = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"{self.crypto} - {self.date}"

@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Withdraw - Fundra Bank</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styledwt.css' %}">
+  
 </head>
 <body>
   <header>
@@ -17,7 +18,6 @@
   <main class="container">
     <h1>Withdraw</h1>
     <div class="image-container">
-      <img src="images/withdraw.jpg" alt="Withdraw">
     </div>
     <form action="{% url 'submit_withdraw' %}" method="post">
     {% csrf_token %}

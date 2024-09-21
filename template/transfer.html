@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transfer - Fundra Bank</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styledwt.css' %}">
+  
 </head>
 <body>
   <header>
@@ -16,9 +17,6 @@
   </header>
   <main class="container">
     <h1>Transfer</h1>
-    <div class="image-container">
-      <img src="images/transfer.jpg" alt="Transfer">
-    </div>
     <form action="{% url 'submit_transfer' %}" method="post">
       {% csrf_token %}
       <label for="account-number">Account Number:</label>

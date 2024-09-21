@@ -5,25 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Page</title>
-    <link rel="stylesheet" href= "{% static 'css/dash1.css' %}">
+    <link rel="icon" href="{% static 'images/bank.png' %}">
+    <link rel="stylesheet" href= "{% static 'css/dash2.css' %}">
+    <!-- <link rel="stylesheet" href= "{% static 'css/styles.css' %}"> -->
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1>Fundra Dashboard</h1>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'accounts' %}">Home</a></li>
-                    <li><a href="{% url 'deposit' %}">Deposit</a></li>
-                    <li><a href="{% url 'withdraw' %}">Withdraw</a></li>
-                    <li><a href="{% url 'transfer' %}">Account Transfer</a></li>
-                    <li><a href="{% url 'transaction' %}">Transaction Report</a></li>
-                    <li><a href="">Settings</a></li>
-                </ul>
-                <a style= "right: 10px; top: 20px; position: absolute; color: aliceblue;" href="" class="logout-button">Logout</a>
-            </nav>
-        </div>
-    </header>
+<header>{% include "nav.html" %}</header>
     <main>
         <section class="intro">
             <div class="container">
@@ -37,15 +24,15 @@
                 <div class="overview-grid">
                     <div class="overview-item">
                         <h3>Account Balance</h3>
-                        <p>{{Request_Account.AC_balance}}</p>
+                        <p>£{{Request_Account.AC_balance}}</p>
                     </div>
                     <div class="overview-item">
                         <h3>Pending Deposits</h3>
-                        <p>$1,200.00</p>
+                        <p>£1200.00</p>
                     </div>
                     <div class="overview-item">
                         <h3>Pending Withdrawals</h3>
-                        <p>$500.00</p>
+                        <p>£500.00</p>
                     </div>
                     <div class="overview-item">
                         <h3>Recent Transactions</h3>

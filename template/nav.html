@@ -1,8 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/.png' %}">
+
     <title>Navigation</title>
     <style>
        .logout-button {
@@ -21,7 +24,8 @@
 </head>
 <body>
     <div class="header-container">
-        <h1 style="color: aliceblue;">Fundra Dashboard</h1>
+        <h1><img src="{% static 'images/final_logo.png' %}" width="50" height="30"/>&nbsp;Fundra</h1>
+        <p>Gateway to Seamless Banking and Crypto Transfer</p>
         <nav>
             <ul>
                 <li><a href="{% url 'accounts' %}">Home</a></li>
@@ -29,9 +33,10 @@
                 <li><a href="{% url 'withdraw' %}">Withdraw</a></li>
                 <li><a href="{% url 'transfer' %}">Account Transfer</a></li>
                 <li><a href="{% url 'transaction' %}">Transaction Report</a></li>
-                <li><a href="">Settings</a></li>
+                <li><a href="{% url 'crypto_sentiment_home' %}">Crypto Sentiment recommendation</a></li>
+                {% comment %} <li><a href="">Settings</a></li> {% endcomment %}
             </ul>
-            <a href="" class="logout-button">Logout</a>
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
             
         </nav>
     </div>

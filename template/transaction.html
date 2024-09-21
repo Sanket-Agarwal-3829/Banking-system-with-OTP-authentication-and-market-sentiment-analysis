@@ -146,21 +146,23 @@
             height: 1.5rem;
         }
     </style>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styledwt.css' %}">
 </head>
 <body>
     <header> {% include "nav.html" %}</header>
     {% block content %}
     <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-10">Transaction Report</h1>
     <hr />
-    <form method="get">
+    <form action="{% url 'transaction' %}" method="post">
+      {% csrf_token %}
         <div class="mt-10 h-10 pl-3 pr-2 bg-white border rounded-md border-gray-500 flex justify-between items-center relative">
-            <input type="search" name="daterange" id="search" placeholder="Filter using date range" value="{{ request.GET.daterange }}" class="appearance-none w-full outline-none focus:outline-none active:outline-none" />
-            <button type="submit" class="search-button" >
+            <input type="search" name="daterange" id="search" placeholder="Filter using date range" value="{{ daterange }}" class="appearance-none w-full outline-none focus:outline-none active:outline-none" />
+            <button type="submit" name="action" class="search-button" >
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
             </button>
+            <button type="submit" name="action" value="generate_pdf">Generate PDF</button>
         </div>
         {% if form.daterange.errors %}
             {% for error in form.daterange.errors %}
@@ -168,27 +170,64 @@
             {% endfor %}
         {% endif %}
     </form>
+    {% comment %} <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin: 20px;
+        }
+    </style>
+    <script>
+        function downloadPDF() {
+            window.location.href = '/banking/transaction/generate-pdf/';
+        }
+    </script>
+    <div class="content">
+        <button onclick="downloadPDF()">Download PDF</button>
+    </div> {% endcomment %}
     <table class="table-auto mx-auto w-full mt-8">
         <thead class="bg-gray-800 text-white">
         <tr class="uppercase font-semibold text-sm">
             <th class="px-4 py-2">Transaction Type</th>
             <th class="px-4 py-2">Date</th>
             <th class="px-4 py-2">Amount</th>
+            <th class="px-4 py-2">Account</th>
             <th class="px-4 py-2">Balance After Transaction</th>
         </tr>
         </thead>
         <tbody>
-        {% for transaction in object_list %}
+        {% for transaction in transactions %}
         <tr class="{% cycle 'bg-gray-300' 'bg-white' %}">
-            <td class="border px-4 py-2 text-center">{{ transaction.get_transaction_type_display }}</td>
-            <td class="border px-4 py-2 text-center">{{ transaction.timestamp }}</td>
-            <td class="border px-4 py-2 text-center">$ {{ transaction.amount }}</td>
-            <td class="border px-4 py-2 text-center">$ {{ transaction.balance_after_transaction }}</td>
+            <td class="border px-4 py-2 text-center">{{ transaction.TC_type }}</td>
+            <td class="border px-4 py-2 text-center">{{ transaction.TC_date }}</td>
+            {% if transaction.TC_type == 'transfer' %}
+                {% if transaction.TC_sender_account == Request_Account %}
+                    <td style="color: red;">-{{transaction.TC_amount}}</td>
+                    <td>{{transaction.TC_receiver_account.AC_AccoutNumber}}</td>
+                {% else %}
+                    <td style="color: green;">+{{transaction.TC_amount}}</td>
+                    <td>{{transaction.TC_sender_account.AC_AccoutNumber}}</td>
+                {% endif %}
+            {% else %}
+                    {%if transaction.TC_type == 'deposit'%}
+                        <td style="color: green;">+{{transaction.TC_amount}}</td>
+                    {% else %}
+                        <td style="color: red;">-{{transaction.TC_amount}}</td>
+                    {% endif %}
+                    <td>N/A</td>
+            {% endif %}
+            <td class="border px-4 py-2 text-center">{{ transaction.TC_balance }}</td>
         </tr>
         {% endfor %}
         <tr class="bg-gray-600 text-white">
-            <th class="px-4 py-2 text-right" colspan="3">Final Balance</th>
-            <th class="px-4 py-2 text-center">$ {{ account.balance }}</th>
+            <th class="px-4 py-2 text-right" colspan="4">Final Balance</th>
+            <th class="px-4 py-2 text-center">$ {{ Request_Account.AC_balance }}</th>
         </tr>
         </tbody>
     </table>

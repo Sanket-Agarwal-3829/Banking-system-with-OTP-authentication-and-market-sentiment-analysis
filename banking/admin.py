@@ -4,3 +4,4 @@ from banking import models
 admin.site.register(models.UserProfiles)
 admin.site.register(models.Account)
 admin.site.register(models.Transactions)
+admin.site.register(models.SentimentData)

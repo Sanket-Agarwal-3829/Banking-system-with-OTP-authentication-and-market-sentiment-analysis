@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deposit - Fundra Bank</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styledwt.css' %}">
+    
+  
 </head>
 <body>
   <header>
@@ -17,7 +19,6 @@
   <main class="container">
     <h1>Deposit</h1>
     <div class="image-container">
-      <img src="images/deposit.jpg" alt="Deposit">
     </div>
     <form action="{% url 'submit_deposit' %}" method="post">
       {% csrf_token %}

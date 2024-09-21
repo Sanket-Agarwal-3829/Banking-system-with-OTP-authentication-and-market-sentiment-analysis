@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    
+    <style>
+        .font-mono {
+            font-family: monospace;
+        }
+        .font-bold {
+            font-weight: bold;
+        }
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .pb-5 {
+            padding-bottom: 1.25rem;
+        }
+        .pt-10 {
+            padding-top: 2.5rem;
+        }
+        .mt-10 {
+            margin-top: 2.5rem;
+        }
+        .h-10 {
+            height: 2.5rem;
+        }
+        .pl-3 {
+            padding-left: 2rem;
+        }
+        .pr-2 {
+            padding-right: 2rem;
+        }
+        /* .bg-white {
+            background-color: white;
+        } */
+        /* .border {
+            border: 1px solid #ccc;
+        } */
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+        .border-gray-500 {
+            border-color: #6b7280;
+        }
+        /* .flex {
+            display: flex;
+         } */
+
+        /* Dont remove the above*/
+        .justify-between {
+            justify-content: space-between;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .relative {
+            position: relative;
+        } 
+        .appearance-none {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .outline-none {
+            outline: none;
+        }
+        .table-auto {
+            width: auto;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .mt-8 {
+            margin-top: 5rem;
+        }
+        .bg-gray-800 {
+            background-color: #2d3748;
+        }
+        .text-white {
+            color: white;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .bg-gray-300 {
+            background-color: #e2e8f0;
+        }
+        .bg-white-100 {
+            background-color: white;
+        }
+        .bg-gray-600 {
+            background-color: #718096;
+        }
+        .text-red-600 {
+            color: #e53e3e;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .search-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3182ce;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-button:hover {
+            background-color: #2b6cb0;
+        }
+        .search-button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    {% comment %} <header> {% include "nav.html" %}</header> {% endcomment %}
+    {% block content %}
+    <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-10">Transaction Report</h1>
+    <div>
+        Account number - {{Request_Account.AC_AccoutNumber}}
+    </div>
+    <table class="table-auto mx-auto w-full mt-8">
+        <thead class="bg-gray-800 text-white">
+            <tr class="uppercase font-semibold text-sm">
+                <th class="">Transaction Type</th>
+                <th class="">Date</th>
+                <th class="">Amount</th>
+                <th class="px-4 py-2">Account</th>
+                <th class="">Balance After Transaction</th>
+            </tr>
+        </thead>
+        <tbody>  
+            {% for transaction in transactions %}
+            <tr class="{% cycle 'bg-gray-300' 'bg-white' %}">
+                <td class="border px-4 py-2 text-center">{{ transaction.TC_type }}</td>
+                <td class="border px-4 py-2 text-center">{{ transaction.TC_date }}</td>
+                {% if transaction.TC_type == 'transfer' %}
+                {% if transaction.TC_sender_account == Request_Account %}
+                <td style="color: red;">-{{transaction.TC_amount}}</td>
+                <td>{{transaction.TC_receiver_account.AC_AccoutNumber}}</td>
+                {% else %}
+                <td style="color: green;">+{{transaction.TC_amount}}</td>
+                <td>{{transaction.TC_sender_account.AC_AccoutNumber}}</td>
+                {% endif %}
+                {% else %}
+                {%if transaction.TC_type == 'deposit'%}
+                <td style="color: green;">+{{transaction.TC_amount}}</td>
+                {% else %}
+                <td style="color: red;">-{{transaction.TC_amount}}</td>
+                {% endif %}
+                <td>N/A</td>
+                {% endif %}
+                <td class="border px-4 py-2 text-center">{{ transaction.TC_balance }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="bg-gray-600 text-white">
+                <th class="px-4 py-2 text-right" colspan="4">Final Balance</th>
+                <th class="px-4 py-2 text-center">$ {{ Request_Account.AC_balance }}</th>
+            </tr>
+        </tbody>
+    </table>
+    {% endblock %}
+
+{% block footer_extra %}
+    <script type="text/javascript">
+        $(function () {
+            $('input[name="daterange"]').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: "Clear",
+                },
+            });
+
+            $('input[name="daterange"]').on("apply.daterangepicker", function (ev, picker) {
+                $(this).val(picker.startDate.format("YYYY-MM-DD") + " - " + picker.endDate.format("YYYY-MM-DD"));
+            });
+
+            $('input[name="daterange"]').on("cancel.daterangepicker", function (ev, picker) {
+                $(this).val("");
+            });
+        });
+    </script>
+{% endblock %}
+<footer>
+    <p>&copy; 2024 Fundra Bank. All rights reserved.</p>
+</footer>
+   
+</body>
+</html>
